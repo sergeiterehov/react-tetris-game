@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TetrisGame } from "./tetris/TetrisGame";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100vw",
+        height: "100vh",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "monospace",
+      }}
+    >
+      <TetrisGame />
+      <div style={{ marginTop: 11 }}>
+        <strong>Up</strong> - rotate figure, <strong>down</strong> - soft drop,{" "}
+        <strong>right/left</strong> - move, <strong>enter</strong> - start
+        again.
+      </div>
+      <div style={{ marginTop: 8, fontSize: "0.8em" }}>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          href="https://github.com/sergeiterehov/react-tetris-game"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
         >
-          Learn React
+          GitHub project
         </a>
-      </header>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
