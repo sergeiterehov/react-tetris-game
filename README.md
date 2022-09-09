@@ -1,5 +1,7 @@
 # React Tetris Game
 
+Demo is [here](https://tetris.terekhov.store)
+
 ![Screenshot React Tetris Game JavaScript/TypeScript](./react-tetris-game.jpg)
 
 ## Control
