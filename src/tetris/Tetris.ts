@@ -197,6 +197,8 @@ export class Tetris {
   }
 
   public move(dx: number) {
+    if (!this.inProgress) return;
+
     const prevFigureX = this.figureX;
 
     this.figureX += dx;
@@ -209,6 +211,8 @@ export class Tetris {
   }
 
   public rotate() {
+    if (!this.inProgress) return;
+
     const size = this.figure.length === 16 ? 4 : 3;
     const prev = this.figure;
     const next = this.figure.slice();

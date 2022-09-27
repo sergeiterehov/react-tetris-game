@@ -1,7 +1,7 @@
 import { beep, beepMany } from "./beep";
 
 const sounds = {
-  onDrop: () => {
+  drop: () => {
     beepMany(
       [30, 70, 8, "sawtooth"],
       [30, 60, 8, "sine"],
@@ -10,7 +10,7 @@ const sounds = {
       [30, 80, 3, "sine"]
     );
   },
-  onTetris: () => {
+  tetris: () => {
     beepMany(
       [100, 600, 10],
       [50, 720, 10],
@@ -20,10 +20,10 @@ const sounds = {
       [100, 720, 5]
     );
   },
-  onClear: () => {
+  clear: () => {
     beepMany([100, 500, 10], [50, 600, 10], [100, 500, 5]);
   },
-  onLevelUp: () => {
+  levelUp: () => {
     beepMany(
       [50, 300, 10],
       [100, 500, 10],
@@ -35,7 +35,7 @@ const sounds = {
       [100, 700, 10]
     );
   },
-  onFinal: () => {
+  final: () => {
     beepMany(
       [250, 720, 10],
       [100, 0, 0],
@@ -44,10 +44,10 @@ const sounds = {
       [1000, 510, 10]
     );
   },
-  onMove: () => {
+  move: () => {
     beep(50, 720, 10);
   },
-  onRotate: () => {
+  rotate: () => {
     beepMany([50, 600, 10], [50, 0, 0], [50, 600, 10]);
   },
 };

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Group, Layer, Path, Rect, Stage, Text } from "react-konva";
+import MusicPlayer from "./music/MusicPlayer";
 import sounds from "./sounds";
 import { FigurePixel, Tetris, TetrisFigure } from "./Tetris";
 import theme, { pallettes } from "./theme";
+import katyusha from "./music/katyusha.json";
 
 const pixelSize = 20;
 const padding = 2;
@@ -54,17 +56,28 @@ export const TetrisGame: React.FC = () => {
   const [, setFrame] = useState(0);
   const [game] = useState(() => new Tetris());
 
+  const [music] = useState(() => {
+    const player = new MusicPlayer();
+
+    player.load(katyusha as any);
+
+    return player;
+  });
+
   // Start game
   useEffect(() => {
     game.onFrame = () => setFrame((prev) => prev + 1);
 
-    game.onDrop = sounds.onDrop;
-    game.onTetris = sounds.onTetris;
-    game.onClear = sounds.onClear;
-    game.onLevelUp = sounds.onLevelUp;
-    game.onFinal = sounds.onFinal;
-    game.onMove = sounds.onMove;
-    game.onRotate = sounds.onRotate;
+    game.onDrop = sounds.drop;
+    game.onTetris = sounds.tetris;
+    game.onClear = sounds.clear;
+    game.onLevelUp = sounds.levelUp;
+    game.onFinal = () => {
+      music.stop();
+      sounds.final();
+    };
+    game.onMove = sounds.move;
+    game.onRotate = sounds.rotate;
 
     const pressedKeys: Record<string, boolean> = {};
 
@@ -84,6 +97,7 @@ export const TetrisGame: React.FC = () => {
       } else if (e.key === "Enter") {
         if (!game.getInProgress()) {
           game.run();
+          music.play(true);
         }
       }
     };
@@ -101,15 +115,15 @@ export const TetrisGame: React.FC = () => {
     window.addEventListener("keydown", keyDownHandler);
     window.addEventListener("keyup", keyUpHandler);
 
-    game.run();
-
     return () => {
       window.removeEventListener("keydown", keyDownHandler);
       window.removeEventListener("keyup", keyUpHandler);
 
       game.destroy();
+
+      music.stop();
     };
-  }, [game]);
+  }, [game, music]);
 
   const level = game.getLevel();
   const stat = game.getStatistics();
