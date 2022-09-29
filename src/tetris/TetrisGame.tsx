@@ -54,18 +54,15 @@ const Pixel: React.FC<{
 
 export const TetrisGame: React.FC = () => {
   const [, setFrame] = useState(0);
+
   const [game] = useState(() => new Tetris());
-
-  const [music] = useState(() => {
-    const player = new MusicPlayer();
-
-    player.load(katyusha as any);
-
-    return player;
-  });
+  const [music] = useState(() => new MusicPlayer());
 
   // Start game
   useEffect(() => {
+    music.volume = 0.03;
+    music.load(katyusha as any);
+
     game.onFrame = () => setFrame((prev) => prev + 1);
 
     game.onDrop = sounds.drop;
@@ -125,6 +122,7 @@ export const TetrisGame: React.FC = () => {
     };
   }, [game, music]);
 
+  const field = game.getField();
   const level = game.getLevel();
   const stat = game.getStatistics();
   const inProgress = game.getInProgress();
@@ -133,6 +131,8 @@ export const TetrisGame: React.FC = () => {
   const rightX = fieldX + fieldWidth + 12;
 
   const borderColorInProgress = inProgress ? theme.success : theme.danger;
+
+  music.speed = game.getHeight() - game.getCurrentHeight() <= 7 ? 1.4 : 1;
 
   return (
     <Stage width={640} height={480}>
@@ -276,7 +276,7 @@ export const TetrisGame: React.FC = () => {
             height={fieldHeight + 8}
             stroke={borderColorInProgress}
           />
-          {game.getField().flatMap((row, y) =>
+          {field.flatMap((row, y) =>
             row.map((pixel, x) => {
               return (
                 <Pixel
@@ -288,6 +288,21 @@ export const TetrisGame: React.FC = () => {
                 />
               );
             })
+          )}
+          {inProgress ? null : (
+            <Group x={-4} y={(fieldHeight - 34) / 2}>
+              <Rect height={34} fill={theme.danger} width={fieldWidth + 8} />
+              <Text
+                fontFamily="monospace"
+                fontSize={26}
+                y={4}
+                fontStyle="bolder"
+                align="center"
+                fill="rgb(255, 255, 255)"
+                width={fieldWidth + 8}
+                text="PRESS ENTER"
+              />
+            </Group>
           )}
         </Group>
       </Layer>

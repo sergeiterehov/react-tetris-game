@@ -54,9 +54,9 @@ export class Tetris {
 
   private prev: TetrisFigure | undefined;
   private next = TetrisFigure.T;
-  private figure: number[] = Tetris.figures[TetrisFigure.T];
-  private figureX = 0;
-  private figureY = 0;
+  private figure: number[] = Tetris.figures[TetrisFigure.S];
+  private figureX = 4;
+  private figureY = 1;
 
   private level = 0;
   private lines = 0;
@@ -140,6 +140,18 @@ export class Tetris {
 
   public getHeight() {
     return this.height;
+  }
+
+  public getCurrentHeight() {
+    for (let y = 0; y < this.height; y += 1) {
+      for (let x = 0; x < this.width; x += 1) {
+        if (this.field[y * this.width + x]) {
+          return this.height - y;
+        }
+      }
+    }
+
+    return 0;
   }
 
   public getNext() {
