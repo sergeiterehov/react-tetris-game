@@ -9,19 +9,19 @@ type Note = {
 };
 
 class MusicPlayer {
-  private speed = 1;
-  private volume = 0.05;
+  public speed = 1;
+  public volume = 0.05;
 
   private notes: Note[] = [];
 
   private playTimer: any = 0;
 
-  public load(data: [number, string, number, number][]) {
-    this.notes = data.map(([offset, note, duration, volume]) => ({
+  public load(data: [number, string, number][]) {
+    this.notes = data.map(([offset, note, duration]) => ({
       offset: (offset / 16) * 1000,
       note,
       duration: (duration / 16) * 1000,
-      volume: volume * 100,
+      volume: 100,
     }));
   }
 
