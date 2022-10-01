@@ -132,7 +132,7 @@ export const TetrisGame: React.FC = () => {
 
   const borderColorInProgress = inProgress ? theme.success : theme.danger;
 
-  music.speed = game.getHeight() - game.getCurrentHeight() <= 7 ? 1.4 : 1;
+  music.speed = game.getHeight() - game.getCurrentHeight() <= 10 ? 1.4 : 1;
 
   return (
     <Stage width={640} height={480}>
