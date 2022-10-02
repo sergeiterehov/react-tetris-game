@@ -2,9 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
 
-    <title>React Tetris Game</title>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="48x48 72x72 96x96 128x128 256x256" href="%PUBLIC_URL%/favicon.256.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="%PUBLIC_URL%/favicon.svg" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <meta name="theme-color" content="#192228" />
+
+    <title>React Tetris Game Touch</title>
 
     <meta
       name="description"
@@ -16,22 +27,8 @@
       content="React, Tetris game, JavaScript, TypeScript, canvas, Konva"
     />
   </head>
-  <body>
+  <body style="background-color: #192228;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
-      <img
-        src="https://raw.githubusercontent.com/sergeiterehov/react-tetris-game/master/react-tetris-game.jpg"
-        alt="Screenshot React Tetris Game JavaScript/TypeScript"
-      />
-      <div>
-        <a
-          href="https://github.com/sergeiterehov/react-tetris-game"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub project
-        </a>
-      </div>
-    </div>
+    <div id="root"></div>
   </body>
 </html>
